@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
 // Load environment variables from .env.test
@@ -31,4 +32,19 @@ jest.mock('@prisma/client', () => {
       },
     })),
   };
+});
+
+const prisma = new PrismaClient();
+
+beforeAll(async () => {
+  await prisma.$connect();
+});
+
+afterAll(async () => {
+  await prisma.$disconnect();
+});
+
+// Add a test to make the file valid
+test('setup file is loaded', () => {
+  expect(true).toBe(true);
 }); 

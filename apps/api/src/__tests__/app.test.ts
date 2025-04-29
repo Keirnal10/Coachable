@@ -14,6 +14,18 @@ describe('API Tests', () => {
     it('should handle 404 errors', async () => {
       const response = await request(app).get('/nonexistent-route');
       expect(response.status).toBe(404);
+      expect(response.body).toEqual({ message: 'Not Found' });
+    });
+
+    it('should handle 500 errors', async () => {
+      // Create a route that throws an error
+      app.get('/error', (req, res, next) => {
+        next(new Error('Test error'));
+      });
+
+      const response = await request(app).get('/error');
+      expect(response.status).toBe(500);
+      expect(response.body).toEqual({ message: 'Something went wrong!' });
     });
   });
 }); 
