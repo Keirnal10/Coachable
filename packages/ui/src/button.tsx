@@ -1,13 +1,13 @@
 "use client";
 
-import { type ButtonHTMLAttributes, type ReactNode } from "react";
+import React from "react";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   appName: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
 }
 
-export const Button = (props: ButtonProps) => {
+export const Button = (props: ButtonProps): React.ReactElement => {
   const { children, className, appName, ...rest } = props;
   return (
     <button
@@ -19,6 +19,6 @@ export const Button = (props: ButtonProps) => {
       {children}
     </button>
   );
-}
+};
 
 Button.displayName = "Button";
