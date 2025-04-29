@@ -10,7 +10,7 @@ export function Card({
   title: string;
   children: ReactNode;
   href: string;
-}): ReactNode {
+}): JSX.Element {
   return (
     <a
       className={className}
