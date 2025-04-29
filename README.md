@@ -1,84 +1,121 @@
-# Turborepo starter
+# Coachable
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern coaching platform built with Next.js and Express.
 
-## Using this example
+## Project Structure
 
-Run the following command:
+This monorepo includes the following applications:
 
-```sh
-npx create-turbo@latest
+### Apps
+
+- `web`: A [Next.js](https://nextjs.org/) frontend application
+- `api`: An Express.js backend API
+
+### Tech Stack
+
+- **Frontend**: Next.js 14, React 18, TypeScript, TailwindCSS
+- **Backend**: Express.js, TypeScript, Prisma ORM
+- **Testing**: Jest, React Testing Library
+- **CI/CD**: GitHub Actions
+- **Deployment**: PM2
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.x
+- npm
+- PostgreSQL
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Keirnal10/Coachable.git
+cd Coachable
 ```
 
-## What's inside?
-
-This Turborepo includes the following packages/apps:
-
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+2. Install dependencies:
+```bash
+npm install
+cd apps/api && npm install
+cd ../web && npm install
 ```
 
-### Develop
+3. Set up environment variables:
+- Copy `.env.example` to `.env` in both `apps/api` and `apps/web`
+- Update the variables with your configuration
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+4. Initialize the database:
+```bash
+cd apps/api
+npx prisma migrate dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Development
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+To start the development servers:
 
+1. Start the API:
+```bash
+cd apps/api
+npm run dev
 ```
-npx turbo link
+
+2. Start the Web app:
+```bash
+cd apps/web
+npm run dev
 ```
 
-## Useful Links
+### Testing
 
-Learn more about the power of Turborepo:
+Run tests for both applications:
 
-- [Tasks](https://turborepo.com/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turborepo.com/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+```bash
+# API tests
+cd apps/api
+npm test
+
+# Web tests
+cd apps/web
+npm test
+```
+
+### Building for Production
+
+```bash
+# Build API
+cd apps/api
+npm run build
+
+# Build Web
+cd apps/web
+npm run build
+```
+
+## Contributing
+
+We use Git Flow for our development workflow:
+
+1. Create a feature branch from `develop`:
+```bash
+git checkout develop
+git checkout -b feature/your-feature-name
+```
+
+2. Make your changes and commit them:
+```bash
+git add .
+git commit -m "feat: your changes"
+```
+
+3. Push your branch and create a Pull Request to `develop`
+
+4. After review and approval, your changes will be merged into `develop`
+
+5. When ready for release, create a release branch from `develop` and merge to `main`
+
+## License
+
+This project is licensed under the MIT License.
